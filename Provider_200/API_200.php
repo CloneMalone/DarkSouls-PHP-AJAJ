@@ -1,8 +1,9 @@
 <?php
 
-// include_once('classes/DB_200.php');
+//JS - uncommented the include and DB connection
+include_once('classes/DB_200.php');
+$db = new DB_200();
 
-// $db = new DB();
 $action = $_REQUEST['action'];
 $table = $_REQUEST['table'];
 
