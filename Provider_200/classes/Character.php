@@ -3,13 +3,15 @@
 class Character {
     private $id;
     private $name;
+    private $class;
     private $level;
     private $faction_id;
     private $weapon_id;
 
-    public function __construct($id = null, $name = "", $level = 0, $faction_id = null, $weapon_id = null) {
+    public function __construct($id = null, $name = "", $class = "", $level = 0, $faction_id = null, $weapon_id = null) {
         $this->id = $id;
         $this->name = $name;
+        $this->class = $class;
         $this->level = $level;
         $this->faction_id = $faction_id;
         $this->weapon_id = $weapon_id;
@@ -21,6 +23,9 @@ class Character {
     }
     public function getName() {
         return $this->name;
+    }
+    public function getClass() {
+        return $this->class;
     }
     public function getLevel() {
         return $this->level;
@@ -38,6 +43,9 @@ class Character {
     public function setName($name) {
         $this->name = $name;
     }
+    public function setClass($class) {
+        $this->class = $class;
+    }
     public function setLevel($level) {
         $this->level = $level;
     }
@@ -53,6 +61,7 @@ class Character {
     return [
         "id" => $this->id,
         "name" => $this->name,
+        "class" => $this->class,
         "level" => $this->level,
         "faction_id" => $this->faction_id,
         "weapon_id" => $this->weapon_id
