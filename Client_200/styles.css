@@ -1,0 +1,231 @@
+/* Dark Souls Theme · Scrum3_Team_200 */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+
+/* ── EMBER ANIMATIONS ────────────────────────────── */
+@keyframes emberFlicker {
+    0%,  100% { text-shadow: 0 0 8px #c84b11, 0 0 20px #c84b11, 0 0 40px #ff6a1a; opacity: 1; }
+    25%        { text-shadow: 0 0 12px #e85d1a, 0 0 28px #c84b11, 0 0 55px #ff6a1a; opacity: 0.92; }
+    50%        { text-shadow: 0 0 6px #c84b11, 0 0 16px #a03808, 0 0 32px #c84b11; opacity: 0.97; }
+    75%        { text-shadow: 0 0 14px #ff7722, 0 0 32px #c84b11, 0 0 60px #ff4400; opacity: 0.88; }
+}
+
+@keyframes goldGlow {
+    0%,  100% { text-shadow: 0 0 6px #c9a84c, 0 0 14px #a07a20; }
+    50%        { text-shadow: 0 0 10px #e8c46a, 0 0 24px #c9a84c, 0 0 40px #a07a20; }
+}
+
+@keyframes neonPulse {
+    0%,  100% { box-shadow: 0 0 4px #c84b11, inset 0 0 6px rgba(200,75,17,0.1); border-color: #c84b11; }
+    50%        { box-shadow: 0 0 12px #c84b11, 0 0 24px rgba(200,75,17,0.3), inset 0 0 10px rgba(200,75,17,0.15); border-color: #e85d1a; }
+}
+
+@keyframes emberRise {
+    0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0.8; }
+    50%  { transform: translateY(-40px) translateX(6px) scale(0.7); opacity: 0.5; }
+    100% { transform: translateY(-80px) translateX(-4px) scale(0.2); opacity: 0; }
+}
+
+/* ── BASE ────────────────────────────────────────── */
+body {
+    background: #0d0b09;
+    color: #e8dcc8;
+    font-family: 'Cinzel', serif;
+    text-align: center;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+/* Floating ember particles */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* ── HEADINGS ─────────────────────────────────────── */
+h1 {
+    color: #c9a84c;
+    font-size: 2rem;
+    margin-bottom: 6px;
+    animation: emberFlicker 3.5s ease-in-out infinite;
+}
+
+h2 {
+    color: #c84b11;
+    margin: 24px 0 12px;
+    animation: goldGlow 4s ease-in-out infinite;
+}
+
+h3 {
+    color: #c9a84c;
+    margin: 18px 0 8px;
+    animation: goldGlow 5s ease-in-out infinite;
+    animation-delay: 0.8s;
+}
+
+.subtitle {
+    color: #a89f8c;
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+    letter-spacing: 2px;
+}
+
+/* ── DIVIDERS ─────────────────────────────────────── */
+hr {
+    border: none;
+    border-top: 1px solid #3a3020;
+    margin: 28px 0;
+    position: relative;
+}
+
+hr::after {
+    content: '✦';
+    position: absolute;
+    left: 50%;
+    top: -9px;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #c84b11;
+    background: #0d0b09;
+    padding: 0 6px;
+    animation: emberFlicker 2.5s ease-in-out infinite;
+}
+
+/* ── NAV BOXES ────────────────────────────────────── */
+.neon-box {
+    border: 1px solid #c84b11;
+    padding: 12px 20px;
+    margin: 8px auto;
+    max-width: 600px;
+    text-align: left;
+}
+
+.neon-box a {
+    color: #c9a84c;
+    text-decoration: none;
+    transition: color 0.2s, text-shadow 0.2s;
+}
+.neon-box a:hover {
+    color: #fff;
+    text-shadow: 0 0 8px #fff, 0 0 16px #c9a84c;
+}
+
+/* ── FORM ─────────────────────────────────────────── */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto 16px;
+    text-align: left;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.8rem;
+    color: #a89f8c;
+}
+
+input {
+    background: #1e1a13;
+    border: 1px solid #3a3020;
+    color: #e8dcc8;
+    padding: 6px 10px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus {
+    border-color: #c84b11;
+    box-shadow: 0 0 8px rgba(200, 75, 17, 0.4);
+}
+
+/* ── BUTTONS ─────────────────────────────────────── */
+.btn-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+button {
+    background: #1e1a13;
+    border: 1px solid #c84b11;
+    color: #c9a84c;
+    padding: 8px 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    background: #c84b11;
+    color: #fff;
+    box-shadow: 0 0 12px rgba(200, 75, 17, 0.6), 0 0 24px rgba(200, 75, 17, 0.2);
+}
+
+/* ── OUTPUT BOX ──────────────────────────────────── */
+#output {
+    background: #1e1a13;
+    border: 1px solid #3a3020;
+    padding: 12px;
+    margin: 0 auto 24px;
+    max-width: 800px;
+    text-align: left;
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: #a89f8c;
+    min-height: 40px;
+    word-break: break-all;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#output:not(:empty) {
+    border-color: #c84b11;
+    box-shadow: 0 0 8px rgba(200, 75, 17, 0.2);
+}
+
+/* ── TABLES ──────────────────────────────────────── */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 24px;
+}
+
+th {
+    background: #16120c;
+    color: #c9a84c;
+    padding: 8px 12px;
+    border: 1px solid #3a3020;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-shadow: 0 0 6px rgba(201, 168, 76, 0.4);
+}
+
+td {
+    padding: 6px 12px;
+    border: 1px solid #3a3020;
+    font-size: 0.8rem;
+    color: #e8dcc8;
+    font-family: monospace;
+}
+
+tr:nth-child(even) td {
+    background: rgba(255, 255, 255, 0.02);
+}

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dark Souls — Scrum3_Team_200</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>⚔ Dark Souls CRUD Web Service</h1>
+        <p class="subtitle">Scrum3_Team_200 · Ben & Jared</p>
+
+        <!-- TESTER LINKS -->
+        <div class="neon-box">
+            1. <a href="../Provider_200/Testers/index.php">
+                View all DB records (HTML output) & test API JSON
+            </a>
+        </div>
+        <div class="neon-box">
+            2. <a href="../Provider_200/API_200.php?action=read&table=characters" target="_blank">
+                View raw JSON: characters table
+            </a>
+        </div>
+        <div class="neon-box">
+            3. <a href="../Provider_200/API_200.php?action=read&table=factions" target="_blank">
+                View raw JSON: factions table
+            </a>
+        </div>
+        <div class="neon-box">
+            4. <a href="../Provider_200/API_200.php?action=read&table=weapons" target="_blank">
+                View raw JSON: weapons table
+            </a>
+        </div>
+
+        <hr>
+
+        <!-- SHARED OUTPUT -->
+        <h2>CRUD Operations</h2>
+        <p class="subtitle">API response appears below after each operation</p>
+        <div id="output"></div>
+
+        <hr>
+
+        <!-- CHARACTERS FORM -->
+        <h2>Characters</h2>
+        <div class="form-grid">
+            <label>ID (update / delete):
+                <input type="number" id="char-id" placeholder="e.g. 1">
+            </label>
+            <label>Name:
+                <input type="text" id="char-name" placeholder="e.g. Artorias">
+            </label>
+            <label>Level:
+                <input type="number" id="char-level" placeholder="e.g. 80">
+            </label>
+            <label>Class:
+                <input type="text" id="char-class" placeholder="e.g. Knight">
+            </label>
+            <label>Faction ID:
+                <input type="number" id="char-faction-id" placeholder="e.g. 1">
+            </label>
+            <label>Weapon ID:
+                <input type="number" id="char-weapon-id" placeholder="e.g. 1">
+            </label>
+        </div>
+        <div class="btn-row">
+            <button onclick="readCharacters()">READ</button>
+            <button onclick="insertCharacter()">INSERT</button>
+            <button onclick="updateCharacter()">UPDATE</button>
+            <button onclick="deleteCharacter()">DELETE</button>
+        </div>
+
+        <hr>
+
+        <!-- FACTIONS FORM -->
+        <h2>Factions</h2>
+        <div class="form-grid">
+            <label>ID (update / delete):
+                <input type="number" id="fac-id" placeholder="e.g. 1">
+            </label>
+            <label>Name:
+                <input type="text" id="fac-name" placeholder="e.g. Warriors of Sunlight">
+            </label>
+            <label>Alignment:
+                <input type="text" id="fac-alignment" placeholder="e.g. Light">
+            </label>
+            <label>Leader:
+                <input type="text" id="fac-leader" placeholder="e.g. Solaire of Astora">
+            </label>
+            <label>Territory:
+                <input type="text" id="fac-territory" placeholder="e.g. Sunlight Altar">
+            </label>
+        </div>
+        <div class="btn-row">
+            <button onclick="readFactions()">READ</button>
+            <button onclick="insertFaction()">INSERT</button>
+            <button onclick="updateFaction()">UPDATE</button>
+            <button onclick="deleteFaction()">DELETE</button>
+        </div>
+
+        <hr>
+
+        <!-- WEAPONS FORM -->
+        <h2>Weapons</h2>
+        <div class="form-grid">
+            <label>ID (update / delete):
+                <input type="number" id="wpn-id" placeholder="e.g. 1">
+            </label>
+            <label>Name:
+                <input type="text" id="wpn-name" placeholder="e.g. Greatsword of Artorias">
+            </label>
+            <label>Type:
+                <input type="text" id="wpn-type" placeholder="e.g. Greatsword">
+            </label>
+            <label>Damage:
+                <input type="number" id="wpn-damage" placeholder="e.g. 500">
+            </label>
+            <label>Scaling:
+                <input type="text" id="wpn-scaling" placeholder="e.g. STR/DEX">
+            </label>
+        </div>
+        <div class="btn-row">
+            <button onclick="readWeapons()">READ</button>
+            <button onclick="insertWeapon()">INSERT</button>
+            <button onclick="updateWeapon()">UPDATE</button>
+            <button onclick="deleteWeapon()">DELETE</button>
+        </div>
+
+        <hr>
+
+        <!-- LIVE TABLE VIEWER -->
+        <h2>Live Table Viewer</h2>
+
+        <h3>Characters</h3>
+        <table id="charactersTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Class</th>
+                    <th>Level</th>
+                    <th>Faction ID</th>
+                    <th>Weapon ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Solaire</td>
+                    <td>Warrior</td>
+                    <td>50</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Artorias</td>
+                    <td>Knight</td>
+                    <td>80</td>
+                    <td>2</td>
+                    <td>2</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Factions</h3>
+        <table id="factionsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Alignment</th>
+                    <th>Leader</th>
+                    <th>Territory</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Warriors of Sunlight</td>
+                    <td>Light</td>
+                    <td>Solaire of Astora</td>
+                    <td>Sunlight Altar</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Darkwraiths</td>
+                    <td>Dark</td>
+                    <td>Artorias the Abysswalker</td>
+                    <td>Abyss</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Weapons</h3>
+        <table id="weaponsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Damage</th>
+                    <th>Scaling</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Greatsword of Artorias</td>
+                    <td>Greatsword</td>
+                    <td>500</td>
+                    <td>STR/DEX</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Moonlight Greatsword</td>
+                    <td>Greatsword</td>
+                    <td>600</td>
+                    <td>INT/DEX</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="app.js"></script>
+    <script src="particles.js"></script>
+
+</body>
+
+</html>
