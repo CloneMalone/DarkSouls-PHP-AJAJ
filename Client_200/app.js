@@ -2,9 +2,11 @@ const API = "../Provider_200/API_200.php";
 
 // ── CHARACTERS ────────────────────────────────────────
 function readCharacters() {
-    $.get(API, { action: "read", table: "characters" }, function(data) {
+    const id = $("#char-id").val();
+    $.get(API, { action: "read", table: "characters", id: id || "" }, function(data) {
         $("#output").html(JSON.stringify(data, null, 2));
         refreshAllTables();
+        clearAllInputs();
     });
 }
 
@@ -20,6 +22,7 @@ function insertCharacter() {
     }, function(data) {
         $("#output").html(JSON.stringify(data));
         refreshAllTables();
+        clearAllInputs();
     });
 }
 
@@ -30,11 +33,14 @@ function updateCharacter() {
         id:         $("#char-id").val(),
         name:       $("#char-name").val(),
         level:      $("#char-level").val(),
+        class:      $("#char-class").val(),
         faction_id: $("#char-faction-id").val(),
         weapon_id:  $("#char-weapon-id").val()
     }, function(data) {
         $("#output").html(JSON.stringify(data));
         refreshAllTables();
+        clearAllInputs();
+
     });
 }
 
@@ -42,14 +48,18 @@ function deleteCharacter() {
     $.get(API, { action: "delete", table: "characters", id: $("#char-id").val() }, function(data) {
         $("#output").html(JSON.stringify(data));
         refreshAllTables();
+        clearAllInputs();
     });
 }
 
 // ── FACTIONS ──────────────────────────────────────────
 function readFactions() {
-    $.get(API, { action: "read", table: "factions" }, function(data) {
+    const id = $("#fac-id").val();
+    $.get(API, { action: "read", table: "factions", id: id || "" }, function(data) {
         $("#output").html(JSON.stringify(data, null, 2));
         refreshAllTables();
+        clearAllInputs();
+
     });
 }
 
@@ -64,6 +74,7 @@ function insertFaction() {
     }, function(data) {
         $("#output").html(JSON.stringify(data));
         refreshAllTables();
+        clearAllInputs();
     });
 }
 
@@ -79,6 +90,7 @@ function updateFaction() {
     }, function(data) {
         $("#output").html(JSON.stringify(data));
         refreshAllTables();
+        clearAllInputs();
     });
 }
 
@@ -86,14 +98,18 @@ function deleteFaction() {
     $.get(API, { action: "delete", table: "factions", id: $("#fac-id").val() }, function(data) {
         $("#output").html(JSON.stringify(data));
         refreshAllTables();
+        clearAllInputs();
     });
 }
 
 // ── WEAPONS ───────────────────────────────────────────
 function readWeapons() {
-    $.get(API, { action: "read", table: "weapons" }, function(data) {
+    const id = $("#wpn-id").val();
+    $.get(API, { action: "read", table: "weapons", id: id || "" }, function(data) {
         $("#output").html(JSON.stringify(data, null, 2));
         refreshAllTables();
+        clearAllInputs();
+
     });
 }
 
@@ -102,12 +118,13 @@ function insertWeapon() {
         action:  "insert",
         table:   "weapons",
         name:    $("#wpn-name").val(),
-        type:    $("#wpn-type").val(),
         damage:  $("#wpn-damage").val(),
-        scaling: $("#wpn-scaling").val()
+        scaling: $("#wpn-scaling").val(),
+        weight:  $("#wpn-weight").val()
     }, function(data) {
         $("#output").html(JSON.stringify(data));
         refreshAllTables();
+        clearAllInputs();
     });
 }
 
@@ -117,12 +134,13 @@ function updateWeapon() {
         table:   "weapons",
         id:      $("#wpn-id").val(),
         name:    $("#wpn-name").val(),
-        type:    $("#wpn-type").val(),
         damage:  $("#wpn-damage").val(),
-        scaling: $("#wpn-scaling").val()
+        scaling: $("#wpn-scaling").val(),
+        weight:  $("#wpn-weight").val()
     }, function(data) {
         $("#output").html(JSON.stringify(data));
         refreshAllTables();
+        clearAllInputs();
     });
 }
 
@@ -130,6 +148,7 @@ function deleteWeapon() {
     $.get(API, { action: "delete", table: "weapons", id: $("#wpn-id").val() }, function(data) {
         $("#output").html(JSON.stringify(data));
         refreshAllTables();
+        clearAllInputs();
     });
 }
 
@@ -152,4 +171,23 @@ function refreshAllTables() {
     loadTable("weapons",    "weaponsTable");
 }
 
-$(document).ready(function() { refreshAllTables(); });
+function clearAllInputs() {
+    $("#char-id").val("");
+    $("#char-name").val("");
+    $("#char-level").val("");
+    $("#char-class").val("");
+    $("#char-faction-id").val("");
+    $("#char-weapon-id").val("");
+    $("#fac-id").val("");
+    $("#fac-name").val("");
+    $("#fac-alignment").val("");
+    $("#fac-leader").val("");
+    $("#fac-territory").val("");
+    $("#wpn-id").val("");
+    $("#wpn-name").val("");
+    $("#wpn-damage").val("");
+    $("#wpn-scaling").val("");
+    $("#wpn-weight").val("");
+}
+
+$(document).ready(function() { refreshAllTables(); clearAllInputs(); });
