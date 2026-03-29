@@ -22,7 +22,7 @@ class DB_200 {
     
     public function read($table, $id = null) {
     if ($id === null) {
-        $sql = "SELECT * FROM $table";
+        $sql = "SELECT * FROM $table ORDER BY id";
     } else {
         $sql = "SELECT * FROM $table WHERE id = $id";
     }

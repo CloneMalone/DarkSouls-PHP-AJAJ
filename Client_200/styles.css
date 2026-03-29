@@ -25,6 +25,26 @@
     100% { transform: translateY(-80px) translateX(-4px) scale(0.2); opacity: 0; }
 }
 
+
+/* ── FLASH AND FADE ANIMATIONS ────────────────────────────── */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+@keyframes flashRow {
+    0%, 100% { opacity: 1; background: transparent; }
+    40%      { opacity: 0.15; background: rgba(200,75,17,0.3); }
+}
+
+tr.anim-insert { animation: fadeIn  0.6s ease forwards; }
+tr.anim-delete { animation: fadeOut 0.5s ease forwards; }
+tr.anim-update { animation: flashRow 0.7s ease forwards; }
+
+
 /* ── BASE ────────────────────────────────────────── */
 body {
     background: #0d0b09;
@@ -229,3 +249,5 @@ td {
 tr:nth-child(even) td {
     background: rgba(255, 255, 255, 0.02);
 }
+
+
